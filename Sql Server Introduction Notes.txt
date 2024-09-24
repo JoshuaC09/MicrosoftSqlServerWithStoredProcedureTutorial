@@ -1,0 +1,26 @@
+What is RDBMS?
+
+- It stands for Relational Database Management System
+- Basis for SQl
+- Consist of tables with rows and columns
+
+
+What is SQl?
+
+- Stands for Structured Query Language
+- RDBMS is the basis for SQL i.e SQL stores data in RDBMS
+- Standard of the American National Standards Institute (ANSI) since 1986
+- Standard of the International for standardizatoin (ISO) since 1987
+- Langunge use to manipulate data in RDBMS
+
+What is Microsoft SQl Server 2022
+
+- Developed by Microsoft
+- Initial Release: April 24, 1989 as SQL Server 1.0
+- Current Version: Microsoft SQL Server 2022
+- Used to create and maintain databases
+
+What is Microsoft SQL Server Management Studio?
+
+- User Interface for SQL i.e graphical tool
+- SSMS provides tools to configure, monitor and administer instances of SQL server and databases.

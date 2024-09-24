@@ -1,0 +1,222 @@
+//NOT NULL CONTRAINT
+
+	CREATE TABLE Customer(
+	CustomerId int NOT NULL,
+	CustomerName varchar(255) NOT NULL,
+	City varchar(255),
+	LogDate DateTime
+	);
+
+
+//UNIQUE KEY CONSTRAINT
+// Can have multiple UNIQUE KEY in single table and allow only 1 null values
+
+	CREATE TABLE Customer(
+	CustomerId int NOT NULL UNIQUE,	
+	CustomerName varchar(255) NOT NULL,
+	City varchar(255),
+	LogDate DateTime
+	);
+
+
+
+//PRIMARY KEY CONTRAINT
+//Does not allow multiple primary key in single table.
+//Does not allow null value
+//Achieve Composite key of two columns are combine together
+
+	CREATE TABLE Customer(
+	CustomerId int NOT NULL PRIMARY KEY,
+	CustomerName varchar(255) NOT NULL,
+	City varchar(255),
+	LogDate DateTime
+	);
+
+//FOREIGN KEY CONSTRAINT
+//A Field in one table referring  to the PRIMARY KEY in another table
+- Child table: The Table with the foreign key
+- Parent table: (Referenced): The table with the primary key
+
+	CREATE TABLE Customer(
+	CustomerId int NOT NULL PRIMARY KEY,
+	CustomerName varchar(255) NOT NULL,
+	City varchar(255),
+	LogDate DateTime
+	);
+
+	CREATE TABLE Department(
+	DepartmentId int NOT NULL PRIMARY KEY,
+	DepartName VARCHAR(255),
+	CustomerId int FOREIGN KEY REFERENCES Customer(CustomerId)
+	);
+
+//Composite Key Combining of two columns to form a primary key
+
+	CREATE TABLE Orders (
+	    OrderId INT NOT NULL,
+	    ProductId INT NOT NULL,
+	    OrderDate DATE,
+	    Quantity INT,
+	    PRIMARY KEY (OrderId, ProductId)  -- Composite Primary Key
+	);
+
+
+// CHECK CONTRAINT
+// A CHECK constraint ensures that data entered into a column meets specified conditions, enforcing data validity and integrity.
+
+	CREATE TABLE Customer(
+	CustomerId int NOT NULL PRIMARY KEY,
+	CustomerName varchar(255) NOT NULL,
+	City varchar(255),
+	Salary Decimal(18,2) CHECK (Salary<1000),
+	LogDate DateTime 
+	);
+
+//ASC and DESC COMMAND
+
+	SELECT * FROM Customer	
+	ORDER BY Salary ASC;
+
+
+	SELECT * FROM Customer
+	ORDER BY Salary DESC;
+
+
+//ALTER TABLE STATEMENT
+
+	ALTER TABLE Employee
+	ADD AGE INT;
+
+	ALTER TABLE Employee
+	DROP COLUMN AGE;
+
+	ALTER TABLE table_name
+	ADD CONSTRAINT new_constraint_name CHECK (condition);
+
+	ALTER TABLE table_name
+	DROP CONSTRAINT constraint_name;
+
+	ALTER TABLE table_name
+	ADD CONSTRAINT new_constraint_name UNIQUE (column_name);
+
+
+	ALTER TABLE table_name
+	DROP CONSTRAINT constraint_name;
+
+	ALTER TABLE table_name
+	ADD CONSTRAINT new_constraint_name FOREIGN KEY (column_name) REFERENCES other_table(other_column);
+
+//UPDATE COMMAND 
+
+	UPDATE Employee
+	SET Salary = '9500'
+	WHERE EmployeeId = 4;
+
+	UPDATE Employee
+	SET EmployeeName = 'Brad', City = 'MAKATI', Salary = 100
+	WHERE EmployeeId = 1;
+
+//SQL ALIASES
+//Give a temporary name for readability
+
+	SELECT EmployeeName AS NameOfEmployee FROM Employee
+
+//STORED PROCEDURE
+//Prepared sql script that you can easily create and save that can be use through out of the database
+//Like a function that can reuse
+
+
+	CREATE PROCEDURE AllRecords3 @City VARCHAR(20), @EmpName varchar(255) 
+	AS
+	BEGIN
+	    SELECT * FROM Employee WHERE City = @City AND EmployeeName = @EmpName;
+	END
+
+	EXEC AllRecords3 @City = 'San Vicente', @EmpName = 'Jasper'
+
+	-------------------------------------------------------------------------
+
+	CREATE PROCEDURE AllRecords2 @City VARCHAR(20)
+	AS
+	BEGIN
+	    SELECT * FROM Employee WHERE City = @City;
+	END
+
+	EXEC AllRecords2 @City='MAKATI';
+
+	-------------------------------------------------------------------------
+	CREATE PROCEDURE AllRecords4 
+	AS
+	BEGIN
+	    SELECT * FROM Employee;
+	END
+
+	EXEC AllRecords4;
+
+
+//CREATE INDEX STATEMENT
+//Use to retrieve data from database faster than any other way
+
+	CREATE INDEX MyIndex
+	on Employee (EmployeeName);
+
+	CREATE INDEX MyIndex2
+	on Employee (EmployeeName,Salary);
+
+	DROP INDEX Employee.MyIndex2
+
+//SELECT INTO STATEMENT
+//Use to copy data from one table into new table
+//Will Create a temporary back up copy of any table
+
+	SELECT * INTO EmployeeBackUp2022
+	FROM Employee;
+
+	SELECT EmployeeName,Salary INTO EmployeeBackUp2023
+	FROM Employee;
+
+	SELECT TOP 50 PERCENT * FROM Employee
+	WHERE Salary > 5000;
+
+
+
+// SELECT TOP STATEMENT
+// Use to return specific number of value
+
+	SELECT TOP 100 PERCENT * FROM Employee
+
+	SELECT TOP 50 PERCENT * FROM Employee
+	WHERE Salary > 5000;
+
+	SELECT TOP 1  * FROM Employee
+
+//BACKUP DATABASE IN SQL 
+
+	BACKUP DATABASE amitDb
+	TO DISK = 'D:\SQL SERVER BACK UP\SQL SERVER TUTORIAL amitDb Back Up\AmitDbBackUp.bak';
+
+//VIEW 
+//Virtual table which is based on the result  of an SQL Statement
+//If you want to show or present a specific data from your database or table you can use a view 
+// Contains rows and columns that is part of your records
+
+ 	CREATE VIEW [Employees MAKATI] AS
+ 	SELECT EmployeeName,City 
+ 	FROM Employee
+ 	WHERE City = 'MAKATI';
+
+
+ 	CREATE VIEW [Employees San Vicente] AS
+ 	SELECT EmployeeName,City 
+ 	FROM Employee
+ 	WHERE City = 'MAKATI';
+
+ 	SELECT * FROM [Employees San Vicente]
+	
+	DROP VIEW [Employees San Vicente]
+
+//DROP A TABLE IN SQL
+
+DROP TABLE Employee
+
+

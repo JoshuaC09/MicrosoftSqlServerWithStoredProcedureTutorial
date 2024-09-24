@@ -1,0 +1,165 @@
+//SEQUENCE OF EXECUTION in SQL 
+	FROM
+	WHERE
+	GROUP BY
+	HAVING
+	SELECT
+	DISTINCT
+	ORDER BY
+	LIMIT
+
+
+
+//Create Database 
+
+	Create Database amitDb;
+
+// Create table
+
+	CREATE TABLE Employee (
+	EmployeeId int,
+	EmployeeName varchar(255),
+	City varchar(255),
+	Salary decimal(18,2)
+	);
+
+// Insert Value in Table
+
+	INSERT INTO dbo.Employee(EmployeeId,EmployeeName,City,Salary)
+	VALUES ('1','tom', 'abc','400');
+
+// Select Statements
+
+	SELECT * FROM dbo.Employee
+	SELECT EmployeeId, EmployeeName FROM dbo.Employee
+
+
+
+// DISTINCT Keyword
+
+	SELECT DISTINCT City FROM dbo.Employee;
+
+// WHERE clause
+
+	SELECT *
+	FROM dbo.Employee
+	WHERE EmployeeId = 1;
+
+
+	SELECT *
+	FROM dbo.Employee
+	WHERE Salary = 400;
+
+
+	SELECT DISTINCT * 
+	FROM Employee 
+	WHERE EmployeeName = 'Tom';
+
+	SELECT *
+	FROM Employee
+	WHERE Salary >= 500;
+
+
+// Order By Keyword. Default for ORDER BY is ASC
+// ASC is Ascending Order (Arranging From Smallest to largest)
+
+	SELECT * 
+	FROM Employee
+	ORDER BY Salary ASC;
+
+	SELECT * 
+	FROM Employee
+	ORDER BY Salary	,EmployeeName DESC;
+
+// AND OPERATOR
+
+	SELECT * 
+	FROM Employee
+	WHERE City = 'San Vicente' AND Salary = 21000;
+
+// OR OPERATOR
+
+	SELECT * 
+	FROM Employee
+	WHERE EmployeeName = 'jasper' OR EmployeeName = 'Joshua';
+
+// NOT OPERATOR
+
+	SELECT * 
+	FROM Employee
+	WHERE NOT SALARY = 20000;
+
+// IN OPERATOR -> Shorthand for multiple OR conditions in SQL 
+
+	SELECT * 
+	FROM Employee
+	WHERE City IN ('Santa maria','San Vicente','Santa Clara');
+
+	SELECT * 
+	FROM Employee
+	WHERE City NOT IN ('San Vicente','Santa Clara');
+
+// BETWEEN OPERATOR
+	SELECT * 
+	FROM Employee
+	WHERE Salary BETWEEN 21000 AND 23000 
+
+	SELECT * 
+	FROM Employee
+	WHERE Salary NOT BETWEEN 21000 AND 23000 
+
+	SELECT * 
+	FROM Employee
+	WHERE EmployeeName BETWEEN 'Jasper' AND 'Joshua'
+	ORDER BY EmployeeId DESC;
+
+
+//LIKE OPERATOR -> specified pattern, 
+              %(percentage):zero one or more characters,
+              _(underscore):one or singel character
+
+	SELECT * FROM Employee
+	WHERE EmployeeName LIKE '%a%';
+
+	SELECT * FROM Employee
+	WHERE EmployeeName LIKE '%a';
+
+
+	SELECT * FROM Employee
+	WHERE EmployeeName LIKE '_a%';
+
+	SELECT * FROM Employee
+	WHERE EmployeeName NOT LIKE '_a%';
+
+//SQL MAX FUNCTION
+
+	SELECT MAX(Salary)  AS Result_MAX
+	FROM Employee
+ 
+//SQL MAX FUNCTION
+
+	SELECT MIN(Salary)  AS Result_MAX
+	FROM Employee
+
+// SUM FUNCTION
+
+	SELECT SUM(SALARY) AS SUM
+	FROM Employee
+
+//AVG FUNCTION
+
+	SELECT AVG(SALARY) AS AVG
+	FROM Employee
+
+//COUNT FUNCTION
+
+	SELECT COUNT(SALARY) AS COUNT
+	FROM Employee
+	WHERE Salary > 21000
+
+
+
+
+
+
+
